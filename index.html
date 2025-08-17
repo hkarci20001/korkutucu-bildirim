@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siber Güvenlik Bildirimi • Olay Kaydı</title>
+
+  <!-- Open Graph: Messenger/FB/WhatsApp önizlemesi için -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Siber Güvenlik Bildirimi – Olay Kaydı Görüntüle" />
+  <meta property="og:description" content="Bu mesajınız güvenlik ve taciz önleme politikaları kapsamında kayda alınmıştır. Detaylar için tıklayın." />
+  <!-- Not: og:image adresini kendi barındırdığınız bir .jpg/.png dosyasına çevirin -->
+  <meta property="og:image" content="https://example.com/badge.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://example.com/olay-kaydi/" />
+
+  <style>
+    :root {
+      --bg: #0b1020; 
+      --fg: #e8eefc; 
+      --muted: #9fb3ff; 
+      --accent: #6ea8fe; 
+      --good: #2ecc71; 
+      --warn: #f39c12; 
+      --bad: #e74c3c; 
+      --card: #141b34; 
+      --card2: #0f1630;
+    }
+    html, body {margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';}
+    .wrap {max-width: 880px; margin: 40px auto; padding: 16px;}
+    .badge {
+      display:flex; align-items:center; gap:16px; padding:18px 20px; border-radius:16px; background:linear-gradient(145deg, var(--card), var(--card2));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .badge img {width:56px; height:56px; border-radius:12px; border:1px solid rgba(255,255,255,.1);}
+    .badge h1 {font-size: 20px; margin: 0 0 4px 0;}
+    .hint {color: var(--muted); font-size: 14px; margin-top:2px}
+    .grid {display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 20px}
+    .card {background: linear-gradient(160deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08);
+           padding:16px; border-radius:16px}
+    .card h3 {margin:0 0 8px 0; font-size:15px; color:#dbe4ff}
+    .kv {display:flex; justify-content:space-between; gap:16px; font-size:14px; padding:6px 0; border-bottom:1px dashed rgba(255,255,255,.08)}
+    .kv:last-child {border-bottom:0}
+    .label {color:#aab4e6}
+    .value {color:#ecf2ff; text-align:right}
+    .pill {display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06)}
+    .legal {margin-top:22px; font-size:12.5px; color:#b6c5ff; line-height:1.6}
+    .footer {margin-top: 30px; font-size: 12px; color: #87a0ff; opacity:.9}
+    .warn {color: var(--warn)}
+    .bad {color: var(--bad)}
+    .good {color: var(--good)}
+    code {font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px;}
+    .cta {margin-top: 16px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn {text-decoration:none; padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.15); color:var(--fg)}
+    .btn:hover {filter: brightness(1.1)}
+    .btn-outline {background: transparent}
+    .btn-solid {background: #1a2b6e}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="badge">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/OOjs_UI_icon_lock.svg/1200px-OOjs_UI_icon_lock.svg.png" alt="lock" />
+      <div>
+        <h1>Siber Güvenlik Bildirimi • Olay Kaydı</h1>
+        <div class="hint">Bu sayfa, istenmeyen / taciz içerikli mesajın bildirim kaydı hakkında otomatik bilgi sağlar.</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Olay Özeti</h3>
+        <div class="kv"><div class="label">Durum</div><div class="value"><span class="pill">Ön İnceleme Başlatıldı</span></div></div>
+        <div class="kv"><div class="label">Dosya No</div><div class="value"><code id="caseId">—</code></div></div>
+        <div class="kv"><div class="label">Şikayet Eden</div><div class="value" id="victim">—</div></div>
+        <div class="kv"><div class="label">Kapsam</div><div class="value">Siber taciz / müstehcen içerik gönderimi</div></div>
+        <div class="kv"><div class="label">Oluşturulma</div><div class="value" id="ts">—</div></div>
+      </div>
+
+      <div class="card">
+        <h3>Oturum Bilgileri (Otomatik)</h3>
+        <div class="kv"><div class="label">Tarayıcı</div><div class="value" id="ua">—</div></div>
+        <div class="kv"><div class="label">Dil</div><div class="value" id="lang">—</div></div>
+        <div class="kv"><div class="label">Ekran</div><div class="value" id="screen">—</div></div>
+        <div class="kv"><div class="label">Saat Dilimi</div><div class="value" id="tz">—</div></div>
+        <div class="kv"><div class="label">Sayfa Kaynağı</div><div class="value" id="ref">—</div></div>
+      </div>
+
+      <div class="card">
+        <h3>Uyarı</h3>
+        <p class="legal">
+          Bu sayfayı görüntüleyen oturum bilgileri kaydedilir ve şikâyet konusu istenmeyen içeriklerle birlikte platform politikalarına uygun olarak korunur. Taciz ve müstehcen içerik gönderimi, Türk Ceza Kanunu ve ilgili mevzuat kapsamında yaptırımlara tabidir. Bu bir bilgilendirme ekranıdır; hukuki süreç gerektiğinde resmi merciler üzerinden işletilir.
+        </p>
+        <div class="cta">
+          <a class="btn btn-solid" href="#" onclick="window.print();return false;">Kaydı Yazdır</a>
+          <a class="btn btn-outline" href="#" onclick="alert('Rapor referansı: '+document.getElementById('caseId').textContent);return false;">Rapor Referansı</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">© 2025 Olay Kaydı Bilgilendirme Sayfası – Bu bir uyarı ve bilgilendirme içeriğidir.</div>
+  </div>
+
+  <script>
+    // Basit yardımcılar
+    const qs = new URLSearchParams(location.search);
+    const caseId = qs.get('case') || ('A' + Math.random().toString(36).slice(2,7).toUpperCase() + '-' + new Date().getFullYear());
+    const victim = decodeURIComponent(qs.get('v') || '').trim() || 'Gizli';
+
+    document.getElementById('caseId').textContent = caseId;
+    document.getElementById('victim').textContent = victim;
+
+    const now = new Date();
+    document.getElementById('ts').textContent = now.toLocaleString();
+    document.getElementById('ua').textContent = navigator.userAgent;
+    document.getElementById('lang').textContent = navigator.language + (navigator.languages ? ' ('+navigator.languages.join(', ')+')' : '');
+    document.getElementById('screen').textContent = `${window.screen.width}×${window.screen.height} @${window.devicePixelRatio}x`;
+    try { document.getElementById('tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e) { document.getElementById('tz').textContent = '—'; }
+    document.getElementById('ref').textContent = document.referrer || 'Doğrudan erişim';
+  </script>
+</body>
+</html>
